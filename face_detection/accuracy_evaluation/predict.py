@@ -229,8 +229,9 @@ def run_prediction_folder():
     from config_farm import configuration_10_560_25L_8scales_v1 as cfg
     import mxnet
 
-    debug_folder = '' # fill the folder that contains images
-    file_name_list = [file_name for file_name in os.listdir(debug_folder) if file_name.lower().endswith('jpg')]
+    cap = cv2.VideoCapture('/home/run/thang/data/videos/faces.mp4')
+    # debug_folder = '' # fill the folder that contains images
+    # file_name_list = [file_name for file_name in os.listdir(debug_folder) if file_name.lower().endswith('jpg')]
 
     symbol_file_path = '../symbol_farm/symbol_10_560_25L_8scales_v1_deploy.json'
     model_file_path = '../saved_model/configuration_10_560_25L_8scales_v1/train_10_560_25L_8scales_v1_iter_1400000.params'
@@ -245,8 +246,14 @@ def run_prediction_folder():
                            receptive_field_center_start=cfg.param_receptive_field_center_start,
                            num_output_scales=cfg.param_num_output_scales)
 
-    for file_name in file_name_list:
-        im = cv2.imread(os.path.join(debug_folder, file_name))
+    # for file_name in file_name_list:
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('/home/run/thang/data/videos/output.avi',fourcc, 20.0, (640,480))
+    while True:
+        ret, im = cap.read()
+        print(im.shape)
+        assert ret==True
+        # im = cv2.imread(os.path.join(debug_folder, file_name))
 
         bboxes = my_predictor.predict(im, resize_scale=1, score_threshold=0.3, top_k=10000, NMS_threshold=0.3, NMS_flag=True, skip_scale_branch_list=[])
         for bbox in bboxes:
@@ -255,10 +262,12 @@ def run_prediction_folder():
         if max(im.shape[:2]) > 1600:
             scale = 1600/max(im.shape[:2])
             im = cv2.resize(im, (0, 0), fx=scale, fy=scale)
-        cv2.imshow('im', im)
-        cv2.waitKey()
+        # cv2.imshow('im', im)
+        # cv2.waitKey()
+        out.write(im)
         # cv2.imwrite(os.path.join(debug_folder, file_name.replace('.jpg','_result.jpg')), im)
-
+    cap.release()
+    out.release()
 
 if __name__ == '__main__':
     run_prediction_folder()
