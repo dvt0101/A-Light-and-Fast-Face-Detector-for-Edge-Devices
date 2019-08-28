@@ -259,6 +259,7 @@ def run_prediction_folder():
         for bboxs in bboxes:
             print(len(bboxs))
             for bbox in bboxs:
+                print(len(bbox))
                 cv2.rectangle(im, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 255, 0), 2)
 
         if max(im.shape[:2]) > 1600:
