@@ -229,12 +229,12 @@ def run_prediction_folder():
     from config_farm import configuration_10_560_25L_8scales_v1 as cfg
     import mxnet
 
-    cap = cv2.VideoCapture('/home/run/thang/data/videos/faces.mp4')
+    cap = cv2.VideoCapture('/content/faces.mp4')
     # debug_folder = '' # fill the folder that contains images
     # file_name_list = [file_name for file_name in os.listdir(debug_folder) if file_name.lower().endswith('jpg')]
 
-    symbol_file_path = '../symbol_farm/symbol_10_560_25L_8scales_v1_deploy.json'
-    model_file_path = '../saved_model/configuration_10_560_25L_8scales_v1/train_10_560_25L_8scales_v1_iter_1400000.params'
+    symbol_file_path = '/content/A-Light-and-Fast-Face-Detector-for-Edge-Devices/face_detection/symbol_farm/symbol_10_560_25L_8scales_v1_deploy.json'
+    model_file_path = '/content/A-Light-and-Fast-Face-Detector-for-Edge-Devices/face_detection/saved_model/configuration_10_560_25L_8scales_v1/train_10_560_25L_8scales_v1_iter_1400000.params'
     my_predictor = Predict(mxnet=mxnet,
                            symbol_file_path=symbol_file_path,
                            model_file_path=model_file_path,
@@ -248,7 +248,7 @@ def run_prediction_folder():
 
     # for file_name in file_name_list:
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('/home/run/thang/data/videos/output.avi',fourcc, 20.0, (640,480))
+    out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (640,480))
     while True:
         ret, im = cap.read()
         print(im.shape)
