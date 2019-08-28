@@ -250,7 +250,7 @@ def run_prediction_folder():
 
     # for file_name in file_name_list:
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (1920,1080))
+    out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (1600,900))
     while True:
         ret, im = cap.read()
         # print(im.shape)
