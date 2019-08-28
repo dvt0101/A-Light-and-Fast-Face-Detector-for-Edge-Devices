@@ -259,7 +259,7 @@ def run_prediction_folder():
         for bboxs in bboxes:
             # print(bbox)
             for bbox in bboxs:
-                cv2.rectangle(im, (int(bbox[0])), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 255, 0), 2)
+                cv2.rectangle(im, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 255, 0), 2)
 
         if max(im.shape[:2]) > 1600:
             scale = 1600/max(im.shape[:2])
