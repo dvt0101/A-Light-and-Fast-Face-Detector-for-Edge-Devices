@@ -253,7 +253,7 @@ def run_prediction_folder():
     out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (1920,1080))
     while True:
         ret, im = cap.read()
-        # print(im.shape)
+        print(im.shape)
         assert ret==True
         # im = cv2.imread(os.path.join(debug_folder, file_name))
 
