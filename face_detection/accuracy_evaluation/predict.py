@@ -248,7 +248,7 @@ def run_prediction_folder():
 
     # for file_name in file_name_list:
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (640,480))
+    out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (1920,1080))
     while True:
         ret, im = cap.read()
         print(im.shape)
@@ -257,7 +257,7 @@ def run_prediction_folder():
 
         bboxes = my_predictor.predict(im, resize_scale=1, score_threshold=0.3, top_k=10000, NMS_threshold=0.3, NMS_flag=True, skip_scale_branch_list=[])
         for bbox in bboxes:
-            printe(type(bbox))
+            print(type(bbox))
             cv2.rectangle(im, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
 
         if max(im.shape[:2]) > 1600:
