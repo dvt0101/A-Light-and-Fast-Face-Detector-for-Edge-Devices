@@ -264,11 +264,12 @@ def run_prediction_folder():
             # for bbox in bboxs:
                 # print(len(bbox))
             cv2.rectangle(im, (int(bboxs[0]), int(bboxs[1])), (int(bboxs[2]), int(bboxs[3])), (0, 255, 0), 2)
+        bboxes = np.array(bboxes)
+        print(bboxes.shape)
 
         if max(im.shape[:2]) > 1600:
             scale = 1600/max(im.shape[:2])
             im = cv2.resize(im, (0, 0), fx=scale, fy=scale)
-            print(im.shape)
         # cv2.imshow('im', im)
         # cv2.waitKey()
         out.write(im)
