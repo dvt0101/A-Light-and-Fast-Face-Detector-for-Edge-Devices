@@ -1,7 +1,7 @@
 # coding: utf-8
 import sys
 import os
-import numpy
+import numpy 
 import cv2
 import time
 
@@ -264,7 +264,7 @@ def run_prediction_folder():
             # for bbox in bboxs:
                 # print(len(bbox))
             cv2.rectangle(im, (int(bboxs[0]), int(bboxs[1])), (int(bboxs[2]), int(bboxs[3])), (0, 255, 0), 2)
-        bboxes = np.array(bboxes)
+        bboxes = numpy.array(bboxes)
         print(bboxes.shape)
 
         if max(im.shape[:2]) > 1600:
