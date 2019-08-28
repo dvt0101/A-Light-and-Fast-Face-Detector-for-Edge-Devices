@@ -253,14 +253,14 @@ def run_prediction_folder():
     out = cv2.VideoWriter('/content/output.avi',fourcc, 20.0, (1920,1080))
     while True:
         ret, im = cap.read()
-        print(im.shape)
+        # print(im.shape)
         assert ret==True
         # im = cv2.imread(os.path.join(debug_folder, file_name))
 
         bboxes = my_predictor.predict(im, resize_scale=1, score_threshold=0.3, top_k=10000, NMS_threshold=0.3, NMS_flag=True, skip_scale_branch_list=[])
         # print(len(bboxes))
         for bboxs in bboxes:
-            print('{}\n'.format(bboxs))
+            # print('{}\n'.format(bboxs))
             # for bbox in bboxs:
                 # print(len(bbox))
             cv2.rectangle(im, (int(bboxs[0]), int(bboxs[1])), (int(bboxs[2]), int(bboxs[3])), (0, 255, 0), 2)
@@ -268,6 +268,7 @@ def run_prediction_folder():
         if max(im.shape[:2]) > 1600:
             scale = 1600/max(im.shape[:2])
             im = cv2.resize(im, (0, 0), fx=scale, fy=scale)
+            print(im.shape)
         # cv2.imshow('im', im)
         # cv2.waitKey()
         out.write(im)
