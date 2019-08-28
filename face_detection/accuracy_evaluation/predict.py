@@ -256,12 +256,13 @@ def run_prediction_folder():
         # im = cv2.imread(os.path.join(debug_folder, file_name))
 
         bboxes = my_predictor.predict(im, resize_scale=1, score_threshold=0.3, top_k=10000, NMS_threshold=0.3, NMS_flag=True, skip_scale_branch_list=[])
+        print(len(bboxes))
         for bboxs in bboxes:
             # print(len(bboxs))
-            print('{}\n'.format(bboxes))
-            # for bbox in bboxs:
-            #     # print(len(bbox))
-            #     cv2.rectangle(im, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 255, 0), 2)
+            # print('{}\n'.format(bboxes))
+            for bbox in bboxs:
+                # print(len(bbox))
+                cv2.rectangle(im, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 255, 0), 2)
 
         if max(im.shape[:2]) > 1600:
             scale = 1600/max(im.shape[:2])
